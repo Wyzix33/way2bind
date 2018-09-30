@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>way2bind</title>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+    <div id="mymodule">
+        <div>Name input: <input bind="name" type="text"></div>
+        <div>Name display only: <span bind="name"></span></div>
+        <div>Name contenteditable: <span style="background-color:orange;min-width:300px;height:20px;display:inline-block" contenteditable="true" bind="name"></span></div>
+        <hr />
+        Surname input: <input bind="surname" type="text"><br>
+        Surname another input: <input bind="surname" type="text"><br>
+        Surname display only: <span bind="surname"></span><br>
+        Surname display only: <span bind="surname"></span><br>
+        Surname textarea: <textarea bind="surname"></textarea><br>
+        Surname select:
+        <select bind="surname">
+            <option value="Some value">Some value</option>
+            <option value="Some other value">Some other value</option>
+        </select><br><br>
+        Change Name by script <input type="button" id="x" value="Change name property in object"><br>
+        Change Surname by script <input type="button" id="y" value="Change surname property in object"><br>
+        Change Surname by script <input type="button" id="z" value="Change surname property directly">
+    </div>
+    <script type="text/javascript" src="bind.js"></script>
+    <script>
+
+        var name_button = document.getElementById('x'),
+            surname_button = document.getElementById('y'),
+            surname_button2 = document.getElementById('z'),
+            module = document.getElementById('mymodule') || document,
+            way2bind = new Bind(module);
+        name_button.onclick = way2bind.modify.bind(way2bind, 'name', 'name Changed by Code');
+        surname_button.onclick = way2bind.modify.bind(way2bind, 'surname', 'Some other value');
+        surname_button2.onclick = function() {
+            way2bind.scope['surname'] = "Some value";
+        }
+    </script>
+
+</body>
+
+</html>
